@@ -1,6 +1,3 @@
-//
-//	Body.h
-//
 #pragma once
 #include "../Math/Vector.h"
 #include "../Math/Quat.h"
@@ -11,17 +8,21 @@
 #include "../Renderer/model.h"
 #include "../Renderer/shader.h"
 
-/*
-====================================================
-Body
-====================================================
-*/
-class Body {
+class Body
+{
 public:
-	Body();
+    Body();
 
-	Vec3		m_position;
-	Quat		m_orientation;
+    Vec3 m_position;
+    Quat m_orientation;
+    Vec3 m_linearVelocity;
+    float m_invMass ;
+    Shape* m_shape;
+    
+    Vec3 GetCenterOfMassWorldSpace() const;
+    Vec3 GetCenterOfMassModelSpace() const;
+    Vec3 WorldSpaceToBodySpace(const Vec3& pt) const;
+    Vec3 BodySpaceToWorldSpace(const Vec3& pt) const;
 
-	Shape *		m_shape;
+    void ApplyImpulseLinear(const Vec3& impulse);
 };
