@@ -42,6 +42,20 @@ void Scene::Initialize()
     m_bodies.push_back(body);
 }
 
+bool Intersect(Body* bodyA, Body* bodyB)
+{
+    const Vec3 ab = bodyB->m_position - bodyA->m_position;
+    const auto sphere_a = dynamic_cast<const ShapeSphere*>(bodyA->m_shape);
+    const auto sphere_b = dynamic_cast<const ShapeSphere*>(bodyB->m_shape);
+    const float radius_ab = sphere_a->m_radius + sphere_b->m_radius;
+    const float length_square = ab.GetLengthSqr();
+    if (length_square <= radius_ab * radius_ab)
+    {
+        return true;
+    }
+    return false;
+}
+
 void Scene::Update(const float dt_sec)
 {
     for (int i = 0; i < m_bodies.size(); i++)
@@ -55,6 +69,29 @@ void Scene::Update(const float dt_sec)
         Vec3 impulseGravity = Vec3(0, 0, -10) * mass * dt_sec;
         body->ApplyImpulseLinear(impulseGravity);
     }
+
+    // Check for collisions with other bodies
+    for (int i = 0; i < m_bodies.size(); i++)
+    {
+        for (int j = i + 1; j < m_bodies.size(); j++)
+        {
+            Body* bodyA = &m_bodies[i];
+            Body* bodyB = &m_bodies[j];
+            
+            // Skip body pairs with infinite mass
+            if (0.0f == bodyA->m_invMass && 0.0f == bodyB->m_invMass)
+            {
+                continue;
+            }
+            
+            if (Intersect(bodyA, bodyB))
+            {
+                bodyA->m_linearVelocity.Zero();
+                bodyB->m_linearVelocity.Zero();
+            }
+        }
+    }
+
     for (int i = 0; i < m_bodies.size(); i++)
     {
         // Position update
