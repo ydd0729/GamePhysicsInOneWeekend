@@ -8,8 +8,9 @@
 ConstraintOrientation::PreSolve
 ================================
 */
-void ConstraintOrientation::PreSolve( const float dt_sec ) {
-	// TODO: Add code
+void ConstraintOrientation::PreSolve(const float dt_sec)
+{
+    // TODO: Add code
 }
 
 /*
@@ -17,6 +18,7 @@ void ConstraintOrientation::PreSolve( const float dt_sec ) {
 ConstraintOrientation::Solve
 ================================
 */
-void ConstraintOrientation::Solve() {
-	// TODO: Add code
+void ConstraintOrientation::Solve()
+{
+    // TODO: Add code
 }

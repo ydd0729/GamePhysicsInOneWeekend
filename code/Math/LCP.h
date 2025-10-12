@@ -11,4 +11,4 @@
 LCP_GaussSeidel
 ====================================================
 */
-VecN LCP_GaussSeidel( const MatN & A, const VecN & b );
+VecN LCP_GaussSeidel(const MatN& A, const VecN& b);

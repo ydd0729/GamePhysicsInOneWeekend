@@ -12,32 +12,39 @@ class DeviceContext;
 FrameBuffer
 ====================================================
 */
-class FrameBuffer {
+class FrameBuffer
+{
 public:
-	FrameBuffer() {}
-	~FrameBuffer() {}
+    FrameBuffer()
+    {
+    }
 
-	struct CreateParms_t {
-		int width;
-		int height;
-		bool hasDepth;
-		bool hasColor;
-	};
+    ~FrameBuffer()
+    {
+    }
 
-	bool Create( DeviceContext * device, CreateParms_t & parms );
-	void Cleanup( DeviceContext * device );
+    struct CreateParms_t
+    {
+        int width;
+        int height;
+        bool hasDepth;
+        bool hasColor;
+    };
 
-	void BeginRenderPass( DeviceContext * device, const int cmdBufferIndex );
-	void EndRenderPass( DeviceContext * device, const int cmdBufferIndex );
+    bool Create(DeviceContext* device, CreateParms_t& parms);
+    void Cleanup(DeviceContext* device);
 
-	CreateParms_t			m_parms;
+    void BeginRenderPass(DeviceContext* device, int cmdBufferIndex);
+    void EndRenderPass(DeviceContext* device, int cmdBufferIndex);
 
-	Image					m_imageDepth;
-	Image					m_imageColor;
+    CreateParms_t m_parms;
 
-	VkFramebuffer			m_vkFrameBuffer;
-	VkRenderPass			m_vkRenderPass;
+    Image m_imageDepth;
+    Image m_imageColor;
+
+    VkFramebuffer m_vkFrameBuffer;
+    VkRenderPass m_vkRenderPass;
 
 private:
-	bool CreateRenderPass( DeviceContext * device );
+    bool CreateRenderPass(DeviceContext* device);
 };

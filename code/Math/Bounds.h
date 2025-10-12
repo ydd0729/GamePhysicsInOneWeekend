@@ -12,24 +12,36 @@
 Bounds
 ====================================================
 */
-class Bounds {
+class Bounds
+{
 public:
-	Bounds() { Clear(); }
-	Bounds( const Bounds & rhs ) : mins( rhs.mins ), maxs( rhs.maxs ) {}
-	const Bounds & operator = ( const Bounds & rhs );
-	~Bounds() {}
+    Bounds() { Clear(); }
 
-	void Clear() { mins = Vec3( 1e6 ); maxs = Vec3( -1e6 ); }
-	bool DoesIntersect( const Bounds & rhs ) const;
-	void Expand( const Vec3 * pts, const int num );
-	void Expand( const Vec3 & rhs );
-	void Expand( const Bounds & rhs );
+    Bounds(const Bounds& rhs) : mins(rhs.mins), maxs(rhs.maxs)
+    {
+    }
 
-	float WidthX() const { return maxs.x - mins.x; }
-	float WidthY() const { return maxs.y - mins.y; }
-	float WidthZ() const { return maxs.z - mins.z; }
+    const Bounds& operator =(const Bounds& rhs);
 
-public:
-	Vec3 mins;
-	Vec3 maxs;
+    ~Bounds()
+    {
+    }
+
+    void Clear()
+    {
+        mins = Vec3(1e6);
+        maxs = Vec3(-1e6);
+    }
+
+    bool DoesIntersect(const Bounds& rhs) const;
+    void Expand(const Vec3* pts, int num);
+    void Expand(const Vec3& rhs);
+    void Expand(const Bounds& rhs);
+
+    float WidthX() const { return maxs.x - mins.x; }
+    float WidthY() const { return maxs.y - mins.y; }
+    float WidthZ() const { return maxs.z - mins.z; }
+
+    Vec3 mins;
+    Vec3 maxs;
 };

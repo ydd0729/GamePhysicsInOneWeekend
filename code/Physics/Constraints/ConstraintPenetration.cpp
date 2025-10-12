@@ -8,8 +8,9 @@
 ConstraintPenetration::PreSolve
 ================================
 */
-void ConstraintPenetration::PreSolve( const float dt_sec ) {
-	// TODO: Add code
+void ConstraintPenetration::PreSolve(const float dt_sec)
+{
+    // TODO: Add code
 }
 
 /*
@@ -17,6 +18,7 @@ void ConstraintPenetration::PreSolve( const float dt_sec ) {
 ConstraintPenetration::PreSolve
 ================================
 */
-void ConstraintPenetration::Solve() {
-	// TODO: Add code
+void ConstraintPenetration::Solve()
+{
+    // TODO: Add code
 }

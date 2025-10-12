@@ -10,7 +10,7 @@ class Vec2
 {
 public:
     Vec2();
-    Vec2(const float value);
+    Vec2(float value);
     Vec2(const Vec2& rhs);
     Vec2(float X, float Y);
     Vec2(const float* xy);
@@ -22,11 +22,11 @@ public:
     const Vec2& operator +=(const Vec2& rhs);
     const Vec2& operator -=(const Vec2& rhs);
     Vec2 operator -(const Vec2& rhs) const;
-    Vec2 operator *(const float rhs) const;
-    const Vec2& operator *=(const float rhs);
-    const Vec2& operator /=(const float rhs);
-    float operator [](const int idx) const;
-    float& operator [](const int idx);
+    Vec2 operator *(float rhs) const;
+    const Vec2& operator *=(float rhs);
+    const Vec2& operator /=(float rhs);
+    float operator [](int idx) const;
+    float& operator [](int idx);
 
     const Vec2& Normalize();
     float GetMagnitude() const;
@@ -35,7 +35,6 @@ public:
 
     const float* ToPtr() const { return &x; }
 
-public:
     float x;
     float y;
 };
@@ -227,12 +226,12 @@ public:
     const Vec3& operator +=(const Vec3& rhs);
     const Vec3& operator -=(const Vec3& rhs);
     Vec3 operator -(const Vec3& rhs) const;
-    Vec3 operator *(const float rhs) const;
-    Vec3 operator /(const float rhs) const;
-    const Vec3& operator *=(const float rhs);
-    const Vec3& operator /=(const float rhs);
-    float operator [](const int idx) const;
-    float& operator [](const int idx);
+    Vec3 operator *(float rhs) const;
+    Vec3 operator /(float rhs) const;
+    const Vec3& operator *=(float rhs);
+    const Vec3& operator /=(float rhs);
+    float operator [](int idx) const;
+    float& operator [](int idx);
 
     void Zero()
     {
@@ -252,7 +251,6 @@ public:
 
     const float* ToPtr() const { return &x; }
 
-public:
     float x;
     float y;
     float z;
@@ -502,7 +500,7 @@ class Vec4
 {
 public:
     Vec4();
-    Vec4(const float value);
+    Vec4(float value);
     Vec4(const Vec4& rhs);
     Vec4(float X, float Y, float Z, float W);
     Vec4(const float* rhs);
@@ -516,9 +514,9 @@ public:
     const Vec4& operator *=(const Vec4& rhs);
     const Vec4& operator /=(const Vec4& rhs);
     Vec4 operator -(const Vec4& rhs) const;
-    Vec4 operator *(const float rhs) const;
-    float operator [](const int idx) const;
-    float& operator [](const int idx);
+    Vec4 operator *(float rhs) const;
+    float operator [](int idx) const;
+    float& operator [](int idx);
 
     float Dot(const Vec4& rhs) const;
     const Vec4& Normalize();
@@ -536,7 +534,6 @@ public:
     const float* ToPtr() const { return &x; }
     float* ToPtr() { return &x; }
 
-public:
     float x;
     float y;
     float z;
@@ -772,7 +769,7 @@ inline bool Vec4::IsValid() const
 class VecN
 {
 public:
-    VecN() : N(0), data(NULL)
+    VecN() : N(0), data(nullptr)
     {
     }
 
@@ -793,7 +790,6 @@ public:
     float Dot(const VecN& rhs) const;
     void Zero();
 
-public:
     int N;
     float* data;
 };

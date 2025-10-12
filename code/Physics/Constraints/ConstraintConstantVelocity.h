@@ -9,22 +9,25 @@
 ConstraintConstantVelocity
 ================================
 */
-class ConstraintConstantVelocity : public Constraint {
+class ConstraintConstantVelocity : public Constraint
+{
 public:
-	ConstraintConstantVelocity() : Constraint(), m_cachedLambda( 2 ), m_Jacobian( 2, 12 ) {
-		m_cachedLambda.Zero();
-		m_baumgarte = 0.0f;
-	}
-	void PreSolve( const float dt_sec ) override;
-	void Solve() override;
-	void PostSolve() override;
+    ConstraintConstantVelocity() : Constraint(), m_cachedLambda(2), m_Jacobian(2, 12)
+    {
+        m_cachedLambda.Zero();
+        m_baumgarte = 0.0f;
+    }
 
-	Quat m_q0;	// The initial relative quaternion q1 * q2^-1
+    void PreSolve(float dt_sec) override;
+    void Solve() override;
+    void PostSolve() override;
 
-	VecN m_cachedLambda;
-	MatMN m_Jacobian;
+    Quat m_q0; // The initial relative quaternion q1 * q2^-1
 
-	float m_baumgarte;
+    VecN m_cachedLambda;
+    MatMN m_Jacobian;
+
+    float m_baumgarte;
 };
 
 /*
@@ -32,29 +35,32 @@ public:
 ConstraintConstantVelocityLimited
 ================================
 */
-class ConstraintConstantVelocityLimited : public Constraint {
+class ConstraintConstantVelocityLimited : public Constraint
+{
 public:
-	ConstraintConstantVelocityLimited() : Constraint(), m_cachedLambda( 4 ), m_Jacobian( 4, 12 ) {
-		m_cachedLambda.Zero();
-		m_baumgarte = 0.0f;
-		m_isAngleViolatedU = false;
-		m_isAngleViolatedV = false;
-		m_angleU = 0.0f;
-		m_angleV = 0.0f;
-	}
-	void PreSolve( const float dt_sec ) override;
-	void Solve() override;
-	void PostSolve() override;
+    ConstraintConstantVelocityLimited() : Constraint(), m_cachedLambda(4), m_Jacobian(4, 12)
+    {
+        m_cachedLambda.Zero();
+        m_baumgarte = 0.0f;
+        m_isAngleViolatedU = false;
+        m_isAngleViolatedV = false;
+        m_angleU = 0.0f;
+        m_angleV = 0.0f;
+    }
 
-	Quat m_q0;	// The initial relative quaternion q1^-1 * q2
+    void PreSolve(float dt_sec) override;
+    void Solve() override;
+    void PostSolve() override;
 
-	VecN m_cachedLambda;
-	MatMN m_Jacobian;
+    Quat m_q0; // The initial relative quaternion q1^-1 * q2
 
-	float m_baumgarte;
+    VecN m_cachedLambda;
+    MatMN m_Jacobian;
 
-	bool m_isAngleViolatedU;
-	bool m_isAngleViolatedV;
-	float m_angleU;
-	float m_angleV;
+    float m_baumgarte;
+
+    bool m_isAngleViolatedU;
+    bool m_isAngleViolatedV;
+    float m_angleU;
+    float m_angleV;
 };

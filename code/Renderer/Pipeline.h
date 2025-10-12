@@ -18,52 +18,63 @@ Pipeline
 Think of this as all of the state that's used to draw
 ====================================================
 */
-class Pipeline {
+class Pipeline
+{
 public:
-	Pipeline() {}
-	~Pipeline() {}
+    Pipeline()
+    {
+    }
 
-	enum CullMode_t {
-		CULL_MODE_FRONT,
-		CULL_MODE_BACK,
-		CULL_MODE_NONE
-	};
+    ~Pipeline()
+    {
+    }
 
-	struct CreateParms_t {
-		CreateParms_t() {
-			memset( this, 0, sizeof( CreateParms_t ) );
-		}
-		VkRenderPass	renderPass;
-		FrameBuffer * framebuffer;
-		Descriptors * descriptors;
-		Shader * shader;
+    enum CullMode_t
+    {
+        CULL_MODE_FRONT,
+        CULL_MODE_BACK,
+        CULL_MODE_NONE
+    };
 
-		int width;
-		int height;
+    struct CreateParms_t
+    {
+        CreateParms_t()
+        {
+            memset(this, 0, sizeof(CreateParms_t));
+        }
 
-		CullMode_t cullMode;
+        VkRenderPass renderPass;
+        FrameBuffer* framebuffer;
+        Descriptors* descriptors;
+        Shader* shader;
 
-		bool depthTest;
-		bool depthWrite;
+        int width;
+        int height;
 
-		int pushConstantSize;
-		VkShaderStageFlagBits pushConstantShaderStages;
-	};
-	bool Create( DeviceContext * device, const CreateParms_t & parms );
-	bool CreateCompute( DeviceContext * device, const CreateParms_t & parms );
-	void Cleanup( DeviceContext * device );
+        CullMode_t cullMode;
 
-	Descriptor GetFreeDescriptor() { return m_parms.descriptors->GetFreeDescriptor(); }
+        bool depthTest;
+        bool depthWrite;
 
-	void BindPipeline( VkCommandBuffer cmdBuffer );
-	void BindPipelineCompute( VkCommandBuffer cmdBuffer );
-	void DispatchCompute( VkCommandBuffer cmdBuffer, int groupCountX, int groupCountY, int groupCountZ );
+        int pushConstantSize;
+        VkShaderStageFlagBits pushConstantShaderStages;
+    };
 
-	CreateParms_t m_parms;
+    bool Create(DeviceContext* device, const CreateParms_t& parms);
+    bool CreateCompute(DeviceContext* device, const CreateParms_t& parms);
+    void Cleanup(DeviceContext* device);
 
-	//
-	//	PipelineState
-	//
-	VkPipelineLayout m_vkPipelineLayout;
-	VkPipeline m_vkPipeline;
+    Descriptor GetFreeDescriptor() { return m_parms.descriptors->GetFreeDescriptor(); }
+
+    void BindPipeline(VkCommandBuffer cmdBuffer);
+    void BindPipelineCompute(VkCommandBuffer cmdBuffer);
+    void DispatchCompute(VkCommandBuffer cmdBuffer, int groupCountX, int groupCountY, int groupCountZ);
+
+    CreateParms_t m_parms;
+
+    //
+    //	PipelineState
+    //
+    VkPipelineLayout m_vkPipelineLayout;
+    VkPipeline m_vkPipeline;
 };

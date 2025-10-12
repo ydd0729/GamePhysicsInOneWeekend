@@ -16,8 +16,9 @@ ConstraintConstantVelocity
 ConstraintConstantVelocity::PreSolve
 ================================
 */
-void ConstraintConstantVelocity::PreSolve( const float dt_sec ) {
-	// TODO: Add code
+void ConstraintConstantVelocity::PreSolve(const float dt_sec)
+{
+    // TODO: Add code
 }
 
 /*
@@ -25,8 +26,9 @@ void ConstraintConstantVelocity::PreSolve( const float dt_sec ) {
 ConstraintConstantVelocity::Solve
 ================================
 */
-void ConstraintConstantVelocity::Solve() {
-	// TODO: Add code
+void ConstraintConstantVelocity::Solve()
+{
+    // TODO: Add code
 }
 
 /*
@@ -34,8 +36,9 @@ void ConstraintConstantVelocity::Solve() {
 ConstraintConstantVelocity::PostSolve
 ================================
 */
-void ConstraintConstantVelocity::PostSolve() {
-	// TODO: Add code
+void ConstraintConstantVelocity::PostSolve()
+{
+    // TODO: Add code
 }
 
 /*
@@ -51,8 +54,9 @@ ConstraintConstantVelocityLimited
 ConstraintConstantVelocityLimited::PreSolve
 ================================
 */
-void ConstraintConstantVelocityLimited::PreSolve( const float dt_sec ) {
-	// TODO: Add code
+void ConstraintConstantVelocityLimited::PreSolve(const float dt_sec)
+{
+    // TODO: Add code
 }
 
 /*
@@ -60,8 +64,9 @@ void ConstraintConstantVelocityLimited::PreSolve( const float dt_sec ) {
 ConstraintConstantVelocityLimited::Solve
 ================================
 */
-void ConstraintConstantVelocityLimited::Solve() {
-	// TODO: Add code
+void ConstraintConstantVelocityLimited::Solve()
+{
+    // TODO: Add code
 }
 
 /*
@@ -69,6 +74,7 @@ void ConstraintConstantVelocityLimited::Solve() {
 ConstraintConstantVelocityLimited::PostSolve
 ================================
 */
-void ConstraintConstantVelocityLimited::PostSolve() {
-	// TODO: Add code
+void ConstraintConstantVelocityLimited::PostSolve()
+{
+    // TODO: Add code
 }

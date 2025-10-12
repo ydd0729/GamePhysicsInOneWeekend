@@ -9,7 +9,7 @@ public:
         m_centerOfMass.Zero();
     }
 
-    Vec3 Support(const Vec3& dir, const Vec3& pos, const Quat& orient, const float bias) const override;
+    Vec3 Support(const Vec3& dir, const Vec3& pos, const Quat& orient, float bias) const override;
 
     Mat3 InertiaTensor() const override;
 
@@ -18,6 +18,5 @@ public:
 
     shapeType_t GetType() const override { return SHAPE_SPHERE; }
 
-public:
     float m_radius;
 };

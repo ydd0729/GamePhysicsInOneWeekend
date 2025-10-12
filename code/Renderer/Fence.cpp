@@ -18,19 +18,21 @@ Fence
 Fence::Create
 ====================================================
 */
-bool Fence::Create( DeviceContext * device ) {
-	VkFenceCreateInfo fenceCreateInfo {};
-	fenceCreateInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
-	fenceCreateInfo.flags = 0;
+bool Fence::Create(DeviceContext* device)
+{
+    VkFenceCreateInfo fenceCreateInfo{};
+    fenceCreateInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+    fenceCreateInfo.flags = 0;
 
-	VkResult result = vkCreateFence( device->m_vkDevice, &fenceCreateInfo, nullptr, &m_vkFence );
-	if ( VK_SUCCESS != result ) {
-		printf( "failed to create fence\n" );
-		assert( 0 );
-		return false;
-	}
+    VkResult result = vkCreateFence(device->m_vkDevice, &fenceCreateInfo, nullptr, &m_vkFence);
+    if (VK_SUCCESS != result)
+    {
+        printf("failed to create fence\n");
+        assert(0);
+        return false;
+    }
 
-	return true;
+    return true;
 }
 
 /*
@@ -38,16 +40,18 @@ bool Fence::Create( DeviceContext * device ) {
 Fence::Wait
 ====================================================
 */
-bool Fence::Wait( DeviceContext * device ) {
-	uint64_t timeoutns = (uint64_t)1e9;
-	VkResult result = vkWaitForFences( device->m_vkDevice, 1, &m_vkFence, VK_TRUE, timeoutns );
+bool Fence::Wait(DeviceContext* device)
+{
+    uint64_t timeoutns = static_cast<uint64_t>(1e9);
+    VkResult result = vkWaitForFences(device->m_vkDevice, 1, &m_vkFence, VK_TRUE, timeoutns);
 
-	vkDestroyFence( device->m_vkDevice, m_vkFence, nullptr );
+    vkDestroyFence(device->m_vkDevice, m_vkFence, nullptr);
 
-	if ( VK_SUCCESS != result ) {
-		printf( "failed to wait for fence\n" );
-		assert( 0 );
-		return false;
-	}
-	return true;
+    if (VK_SUCCESS != result)
+    {
+        printf("failed to wait for fence\n");
+        assert(0);
+        return false;
+    }
+    return true;
 }

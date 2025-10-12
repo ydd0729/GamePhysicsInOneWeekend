@@ -10,16 +10,22 @@
 Fence
 ====================================================
 */
-class Fence {
+class Fence
+{
 public:
-	Fence( DeviceContext * device ) { Create( device ); m_device = device; }
-	~Fence() { Wait( m_device ); }
+    Fence(DeviceContext* device)
+    {
+        Create(device);
+        m_device = device;
+    }
 
-	VkFence m_vkFence;
+    ~Fence() { Wait(m_device); }
+
+    VkFence m_vkFence;
 
 private:
-	bool Create( DeviceContext * device );
-	bool Wait( DeviceContext * device );
+    bool Create(DeviceContext* device);
+    bool Wait(DeviceContext* device);
 
-	DeviceContext * m_device;
+    DeviceContext* m_device;
 };

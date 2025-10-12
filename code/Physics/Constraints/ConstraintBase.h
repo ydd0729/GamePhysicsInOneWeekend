@@ -15,29 +15,38 @@
 Constraint
 ====================================================
 */
-class Constraint {
+class Constraint
+{
 public:
-	virtual void PreSolve( const float dt_sec ) {}
-	virtual void Solve() {}
-	virtual void PostSolve() {}
+    virtual void PreSolve(const float dt_sec)
+    {
+    }
 
-	static Mat4 Left( const Quat & q );
-	static Mat4 Right( const Quat & q );
+    virtual void Solve()
+    {
+    }
+
+    virtual void PostSolve()
+    {
+    }
+
+    static Mat4 Left(const Quat& q);
+    static Mat4 Right(const Quat& q);
 
 protected:
-	MatMN GetInverseMassMatrix() const;
-	VecN GetVelocities() const;
-	void ApplyImpulses( const VecN & impulses );
+    MatMN GetInverseMassMatrix() const;
+    VecN GetVelocities() const;
+    void ApplyImpulses(const VecN& impulses);
 
 public:
-	Body * m_bodyA;
-	Body * m_bodyB;
+    Body* m_bodyA;
+    Body* m_bodyB;
 
-	Vec3 m_anchorA;		// The anchor location in bodyA's space
-	Vec3 m_axisA;		// The axis direction in bodyA's space
+    Vec3 m_anchorA; // The anchor location in bodyA's space
+    Vec3 m_axisA; // The axis direction in bodyA's space
 
-	Vec3 m_anchorB;		// The anchor location in bodyB's space
-	Vec3 m_axisB;		// The axis direction in bodyB's space
+    Vec3 m_anchorB; // The anchor location in bodyB's space
+    Vec3 m_axisB; // The axis direction in bodyB's space
 };
 
 /*
@@ -45,12 +54,13 @@ public:
 Constraint::GetInverseMassMatrix
 ====================================================
 */
-inline MatMN Constraint::GetInverseMassMatrix() const {
-	MatMN invMassMatrix( 12, 12 );
-	
-	// TODO: Add code
+inline MatMN Constraint::GetInverseMassMatrix() const
+{
+    MatMN invMassMatrix(12, 12);
 
-	return invMassMatrix;
+    // TODO: Add code
+
+    return invMassMatrix;
 }
 
 /*
@@ -58,12 +68,13 @@ inline MatMN Constraint::GetInverseMassMatrix() const {
 Constraint::GetVelocities
 ====================================================
 */
-inline VecN Constraint::GetVelocities() const {
-	VecN q_dt( 12 );
+inline VecN Constraint::GetVelocities() const
+{
+    VecN q_dt(12);
 
-	// TODO: Add code
+    // TODO: Add code
 
-	return q_dt;
+    return q_dt;
 }
 
 /*
@@ -71,8 +82,9 @@ inline VecN Constraint::GetVelocities() const {
 Constraint::ApplyImpulses
 ====================================================
 */
-inline void Constraint::ApplyImpulses( const VecN & impulses ) {
-	// TODO: Add code
+inline void Constraint::ApplyImpulses(const VecN& impulses)
+{
+    // TODO: Add code
 }
 
 /*
@@ -80,12 +92,13 @@ inline void Constraint::ApplyImpulses( const VecN & impulses ) {
 Constraint::Left
 ====================================================
 */
-inline Mat4 Constraint::Left( const Quat & q ) {
-	Mat4 L;
-	
-	// TODO: Add code
+inline Mat4 Constraint::Left(const Quat& q)
+{
+    Mat4 L;
 
-	return L.Transpose();
+    // TODO: Add code
+
+    return L.Transpose();
 }
 
 /*
@@ -93,10 +106,11 @@ inline Mat4 Constraint::Left( const Quat & q ) {
 Constraint::Right
 ====================================================
 */
-inline Mat4 Constraint::Right( const Quat & q ) {
-	Mat4 R;
-	
-	// TODO: Add code
+inline Mat4 Constraint::Right(const Quat& q)
+{
+    Mat4 R;
 
-	return R.Transpose();
+    // TODO: Add code
+
+    return R.Transpose();
 }

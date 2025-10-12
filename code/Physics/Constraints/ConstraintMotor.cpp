@@ -9,8 +9,9 @@
 ConstraintMotor::PreSolve
 ================================
 */
-void ConstraintMotor::PreSolve( const float dt_sec ) {
-	// TODO: Add code
+void ConstraintMotor::PreSolve(const float dt_sec)
+{
+    // TODO: Add code
 }
 
 /*
@@ -18,6 +19,7 @@ void ConstraintMotor::PreSolve( const float dt_sec ) {
 ConstraintMotor::Solve
 ================================
 */
-void ConstraintMotor::Solve() {
-	// TODO: Add code
+void ConstraintMotor::Solve()
+{
+    // TODO: Add code
 }

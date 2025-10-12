@@ -8,18 +8,18 @@
 
 Scene::~Scene()
 {
-    for (int i = 0; i < m_bodies.size(); i++)
+    for (auto& m_bodie : m_bodies)
     {
-        delete m_bodies[i].m_shape;
+        delete m_bodie.m_shape;
     }
     m_bodies.clear();
 }
 
 void Scene::Reset()
 {
-    for (int i = 0; i < m_bodies.size(); i++)
+    for (const auto& m_bodie : m_bodies)
     {
-        delete m_bodies[i].m_shape;
+        delete m_bodie.m_shape;
     }
     m_bodies.clear();
 
@@ -40,20 +40,6 @@ void Scene::Initialize()
     body.m_invMass = 0.0f;
     body.m_shape = new ShapeSphere(1000.0f);
     m_bodies.push_back(body);
-}
-
-bool Intersect(Body* bodyA, Body* bodyB)
-{
-    const Vec3 ab = bodyB->m_position - bodyA->m_position;
-    const auto sphere_a = dynamic_cast<const ShapeSphere*>(bodyA->m_shape);
-    const auto sphere_b = dynamic_cast<const ShapeSphere*>(bodyB->m_shape);
-    const float radius_ab = sphere_a->m_radius + sphere_b->m_radius;
-    const float length_square = ab.GetLengthSqr();
-    if (length_square <= radius_ab * radius_ab)
-    {
-        return true;
-    }
-    return false;
 }
 
 void Scene::Update(const float dt_sec)
@@ -77,24 +63,24 @@ void Scene::Update(const float dt_sec)
         {
             Body* bodyA = &m_bodies[i];
             Body* bodyB = &m_bodies[j];
-            
+
             // Skip body pairs with infinite mass
             if (0.0f == bodyA->m_invMass && 0.0f == bodyB->m_invMass)
             {
                 continue;
             }
-            
-            if (Intersect(bodyA, bodyB))
+
+            contact_t contact;
+            if (Intersect(bodyA, bodyB, contact))
             {
-                bodyA->m_linearVelocity.Zero();
-                bodyB->m_linearVelocity.Zero();
+                ResolveContact(contact);
             }
         }
     }
 
-    for (int i = 0; i < m_bodies.size(); i++)
+    for (auto& m_bodie : m_bodies)
     {
         // Position update
-        m_bodies[i].m_position += m_bodies[i].m_linearVelocity * dt_sec;
+        m_bodie.m_position += m_bodie.m_linearVelocity * dt_sec;
     }
 }

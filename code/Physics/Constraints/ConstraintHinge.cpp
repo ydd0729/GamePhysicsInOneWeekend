@@ -16,8 +16,9 @@ ConstraintHingeQuat
 ConstraintHingeQuat::PreSolve
 ================================
 */
-void ConstraintHingeQuat::PreSolve( const float dt_sec ) {
-	// TODO: Add code
+void ConstraintHingeQuat::PreSolve(const float dt_sec)
+{
+    // TODO: Add code
 }
 
 /*
@@ -25,8 +26,9 @@ void ConstraintHingeQuat::PreSolve( const float dt_sec ) {
 ConstraintHingeQuat::Solve
 ================================
 */
-void ConstraintHingeQuat::Solve() {
-	// TODO: Add code
+void ConstraintHingeQuat::Solve()
+{
+    // TODO: Add code
 }
 
 /*
@@ -34,8 +36,9 @@ void ConstraintHingeQuat::Solve() {
 ConstraintHingeQuat::PostSolve
 ================================
 */
-void ConstraintHingeQuat::PostSolve() {
-	// TODO: Add code
+void ConstraintHingeQuat::PostSolve()
+{
+    // TODO: Add code
 }
 
 /*
@@ -51,8 +54,9 @@ ConstraintHingeQuatLimited
 ConstraintHingeQuatLimited::PreSolve
 ================================
 */
-void ConstraintHingeQuatLimited::PreSolve( const float dt_sec ) {
-	// TODO: Add code
+void ConstraintHingeQuatLimited::PreSolve(const float dt_sec)
+{
+    // TODO: Add code
 }
 
 /*
@@ -60,8 +64,9 @@ void ConstraintHingeQuatLimited::PreSolve( const float dt_sec ) {
 ConstraintHingeQuatLimited::Solve
 ================================
 */
-void ConstraintHingeQuatLimited::Solve() {
-	// TODO: Add code
+void ConstraintHingeQuatLimited::Solve()
+{
+    // TODO: Add code
 }
 
 /*
@@ -69,6 +74,7 @@ void ConstraintHingeQuatLimited::Solve() {
 ConstraintHingeQuatLimited::PostSolve
 ================================
 */
-void ConstraintHingeQuatLimited::PostSolve() {
-	// TODO: Add code
+void ConstraintHingeQuatLimited::PostSolve()
+{
+    // TODO: Add code
 }

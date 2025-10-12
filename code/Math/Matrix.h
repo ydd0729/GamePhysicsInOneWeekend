@@ -13,12 +13,11 @@ public:
     Mat2(const Vec2& row0, const Vec2& row1);
     Mat2& operator =(const Mat2& rhs);
 
-    const Mat2& operator *=(const float rhs);
+    const Mat2& operator *=(float rhs);
     const Mat2& operator +=(const Mat2& rhs);
 
     float Determinant() const { return rows[0].x * rows[1].y - rows[0].y * rows[1].x; }
 
-public:
     Vec2 rows[2];
 };
 
@@ -80,17 +79,16 @@ public:
     float Determinant() const;
     Mat3 Transpose() const;
     Mat3 Inverse() const;
-    Mat2 Minor(const int i, const int j) const;
-    float Cofactor(const int i, const int j) const;
+    Mat2 Minor(int i, int j) const;
+    float Cofactor(int i, int j) const;
 
     Vec3 operator *(const Vec3& rhs) const;
-    Mat3 operator *(const float rhs) const;
+    Mat3 operator *(float rhs) const;
     Mat3 operator *(const Mat3& rhs) const;
     Mat3 operator +(const Mat3& rhs) const;
-    const Mat3& operator *=(const float rhs);
+    const Mat3& operator *=(float rhs);
     const Mat3& operator +=(const Mat3& rhs);
 
-public:
     Vec3 rows[3];
 };
 
@@ -230,7 +228,7 @@ inline Mat2 Mat3::Minor(const int i, const int j) const
 inline float Mat3::Cofactor(const int i, const int j) const
 {
     const Mat2 minor = Minor(i, j);
-    const float C = float(pow(-1, i + 1 + j + 1)) * minor.Determinant();
+    const float C = static_cast<float>(pow(-1, i + 1 + j + 1)) * minor.Determinant();
     return C;
 }
 
@@ -297,8 +295,8 @@ public:
     float Determinant() const;
     Mat4 Transpose() const;
     Mat4 Inverse() const;
-    Mat3 Minor(const int i, const int j) const;
-    float Cofactor(const int i, const int j) const;
+    Mat3 Minor(int i, int j) const;
+    float Cofactor(int i, int j) const;
 
     void Orient(Vec3 pos, Vec3 fwd, Vec3 up);
     void LookAt(Vec3 pos, Vec3 lookAt, Vec3 up);
@@ -311,11 +309,10 @@ public:
     float* ToPtr() { return rows[0].ToPtr(); }
 
     Vec4 operator *(const Vec4& rhs) const;
-    Mat4 operator *(const float rhs) const;
+    Mat4 operator *(float rhs) const;
     Mat4 operator *(const Mat4& rhs) const;
-    const Mat4& operator *=(const float rhs);
+    const Mat4& operator *=(float rhs);
 
-public:
     Vec4 rows[4];
 };
 
@@ -461,7 +458,7 @@ inline Mat3 Mat4::Minor(const int i, const int j) const
 inline float Mat4::Cofactor(const int i, const int j) const
 {
     const Mat3 minor = Minor(i, j);
-    const float C = float(pow(-1, i + 1 + j + 1)) * minor.Determinant();
+    const float C = static_cast<float>(pow(-1, i + 1 + j + 1)) * minor.Determinant();
     return C;
 }
 
@@ -625,12 +622,11 @@ public:
     const MatMN& operator *=(float rhs);
     VecN operator *(const VecN& rhs) const;
     MatMN operator *(const MatMN& rhs) const;
-    MatMN operator *(const float rhs) const;
+    MatMN operator *(float rhs) const;
 
     void Zero();
     MatMN Transpose() const;
 
-public:
     int M; // M rows
     int N; // N columns
     VecN* rows;
@@ -771,7 +767,6 @@ public:
     VecN operator *(const VecN& rhs);
     MatN operator *(const MatN& rhs);
 
-public:
     int numDimensions;
     VecN* rows;
 };

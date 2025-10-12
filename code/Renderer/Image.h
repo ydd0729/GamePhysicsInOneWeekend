@@ -10,28 +10,35 @@
 Image
 ====================================================
 */
-class Image {
+class Image
+{
 public:
-	Image() {}
-	~Image() {}
+    Image()
+    {
+    }
 
-	struct CreateParms_t {
-		VkImageUsageFlags usageFlags;
-		VkFormat format;
-		int width;
-		int height;
-		int depth;
-	};
+    ~Image()
+    {
+    }
 
-	bool Create( DeviceContext * device, const CreateParms_t & parms );
-	void Cleanup( DeviceContext * device );
-	void TransitionLayout( DeviceContext * device );
-	void TransitionLayout( VkCommandBuffer cmdBuffer, VkImageLayout newLayout );
+    struct CreateParms_t
+    {
+        VkImageUsageFlags usageFlags;
+        VkFormat format;
+        int width;
+        int height;
+        int depth;
+    };
 
-	CreateParms_t	m_parms;
-	VkImage			m_vkImage;
-	VkImageView		m_vkImageView;
-	VkDeviceMemory	m_vkDeviceMemory;
+    bool Create(DeviceContext* device, const CreateParms_t& parms);
+    void Cleanup(DeviceContext* device);
+    void TransitionLayout(DeviceContext* device);
+    void TransitionLayout(VkCommandBuffer cmdBuffer, VkImageLayout newLayout);
 
-	VkImageLayout	m_vkImageLayout;
+    CreateParms_t m_parms;
+    VkImage m_vkImage;
+    VkImageView m_vkImageView;
+    VkDeviceMemory m_vkDeviceMemory;
+
+    VkImageLayout m_vkImageLayout;
 };

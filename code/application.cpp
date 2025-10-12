@@ -15,7 +15,7 @@
 
 #include "Scene.h"
 
-Application* g_application = NULL;
+Application* g_application = nullptr;
 
 #include <time.h>
 #include <windows.h>
@@ -50,10 +50,10 @@ int GetTimeMicroseconds()
     unsigned __int64 tick;
     QueryPerformanceCounter((LARGE_INTEGER*)&tick);
 
-    const double ticks_per_micro = (double)(gTicksPerSecond / 1000000);
+    const double ticks_per_micro = static_cast<double>(gTicksPerSecond / 1000000);
 
-    const unsigned __int64 timeMicro = (unsigned __int64)((double)(tick - gStartTicks) / ticks_per_micro);
-    return (int)timeMicro;
+    const unsigned __int64 timeMicro = static_cast<unsigned __int64>((double)(tick - gStartTicks) / ticks_per_micro);
+    return static_cast<int>(timeMicro);
 }
 
 void Application::Initialize()
@@ -70,7 +70,7 @@ void Application::Initialize()
     m_models.reserve(m_scene->m_bodies.size());
     for (int i = 0; i < m_scene->m_bodies.size(); i++)
     {
-        Model* model = new Model();
+        auto model = new Model();
         model->BuildFromShape(m_scene->m_bodies[i].m_shape);
         model->MakeVBO(&m_deviceContext);
 
@@ -111,13 +111,13 @@ void Application::InitializeGLFW()
     m_glfwWindow = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "GamePhysicsWeekend", nullptr, nullptr);
 
     glfwSetWindowUserPointer(m_glfwWindow, this);
-    glfwSetWindowSizeCallback(m_glfwWindow, Application::OnWindowResized);
+    glfwSetWindowSizeCallback(m_glfwWindow, OnWindowResized);
 
     glfwSetInputMode(m_glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetInputMode(m_glfwWindow, GLFW_STICKY_KEYS, GLFW_TRUE);
-    glfwSetCursorPosCallback(m_glfwWindow, Application::OnMouseMoved);
-    glfwSetScrollCallback(m_glfwWindow, Application::OnMouseWheelScrolled);
-    glfwSetKeyCallback(m_glfwWindow, Application::OnKeyboard);
+    glfwSetCursorPosCallback(m_glfwWindow, OnMouseMoved);
+    glfwSetScrollCallback(m_glfwWindow, OnMouseWheelScrolled);
+    glfwSetKeyCallback(m_glfwWindow, OnKeyboard);
 }
 
 /*
@@ -219,7 +219,8 @@ bool Application::InitializeVulkan()
     //
     //	Uniform Buffer
     //
-    m_uniformBuffer.Allocate(&m_deviceContext, NULL, sizeof(float) * 16 * 4 * 128, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT);
+    m_uniformBuffer.Allocate(&m_deviceContext, nullptr, sizeof(float) * 16 * 4 * 128,
+                             VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT);
 
     //
     //	Offscreen rendering
@@ -292,7 +293,7 @@ void Application::Cleanup()
 
     // Delete the screen so that it can clean itself up
     delete m_scene;
-    m_scene = NULL;
+    m_scene = nullptr;
 
     // Delete models
     for (int i = 0; i < m_models.size(); i++)
@@ -323,7 +324,7 @@ void Application::OnWindowResized(GLFWwindow* window, int windowWidth, int windo
         return;
     }
 
-    Application* application = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
+    auto application = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
     application->ResizeWindow(windowWidth, windowHeight);
 }
 
@@ -353,20 +354,19 @@ void Application::ResizeWindow(int windowWidth, int windowHeight)
         {
             printf("Unable to build pipeline!\n");
             assert(0);
-            return;
         }
     }
 }
 
 void Application::OnMouseMoved(GLFWwindow* window, double x, double y)
 {
-    Application* application = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
-    application->MouseMoved((float)x, (float)y);
+    auto application = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
+    application->MouseMoved(static_cast<float>(x), static_cast<float>(y));
 }
 
 void Application::MouseMoved(float x, float y)
 {
-    Vec2 newPosition = Vec2(x, y);
+    auto newPosition = Vec2(x, y);
     Vec2 ds = newPosition - m_mousePosition;
     m_mousePosition = newPosition;
 
@@ -380,8 +380,8 @@ void Application::MouseMoved(float x, float y)
 
 void Application::OnMouseWheelScrolled(GLFWwindow* window, double x, double y)
 {
-    Application* application = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
-    application->MouseScrolled((float)y);
+    auto application = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
+    application->MouseScrolled(static_cast<float>(y));
 }
 
 void Application::MouseScrolled(float z)
@@ -400,7 +400,7 @@ Application::OnKeyboard
 */
 void Application::OnKeyboard(GLFWwindow* window, int key, int scancode, int action, int modifiers)
 {
-    Application* application = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
+    auto application = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
     application->Keyboard(key, scancode, action, modifiers);
 }
 
@@ -440,10 +440,10 @@ void Application::MainLoop()
     while (!glfwWindowShouldClose(m_glfwWindow))
     {
         int time = GetTimeMicroseconds();
-        float dt_us = (float)time - (float)timeLastFrame;
+        float dt_us = static_cast<float>(time) - static_cast<float>(timeLastFrame);
         if (dt_us < 16000.0f)
         {
-            int x = 16000 - (int)dt_us;
+            int x = 16000 - static_cast<int>(dt_us);
             std::this_thread::sleep_for(std::chrono::microseconds(x));
             dt_us = 16000;
             time = GetTimeMicroseconds();
@@ -520,7 +520,7 @@ void Application::UpdateUniforms()
     //	Update the uniform buffers
     //
     {
-        unsigned char* mappedData = (unsigned char*)m_uniformBuffer.MapBuffer(&m_deviceContext);
+        auto mappedData = static_cast<unsigned char*>(m_uniformBuffer.MapBuffer(&m_deviceContext));
 
         //
         // Update the uniform buffer with the camera information
@@ -528,7 +528,7 @@ void Application::UpdateUniforms()
         {
             Vec3 camPos;
             Vec3 camLookAt;
-            Vec3 camUp = Vec3(0, 0, 1);
+            auto camUp = Vec3(0, 0, 1);
 
             camPos.x = cosf(m_cameraPositionPhi) * sinf(m_cameraPositionTheta);
             camPos.y = sinf(m_cameraPositionPhi) * sinf(m_cameraPositionTheta);
@@ -543,10 +543,10 @@ void Application::UpdateUniforms()
             int windowHeight;
             glfwGetWindowSize(m_glfwWindow, &windowWidth, &windowHeight);
 
-            const float zNear = 0.1f;
-            const float zFar = 1000.0f;
-            const float fovy = 45.0f;
-            const float aspect = (float)windowHeight / (float)windowWidth;
+            constexpr float zNear = 0.1f;
+            constexpr float zFar = 1000.0f;
+            constexpr float fovy = 45.0f;
+            const float aspect = static_cast<float>(windowHeight) / static_cast<float>(windowWidth);
             camera.matProj.PerspectiveVulkan(fovy, aspect, zNear, zFar);
             camera.matProj = camera.matProj.Transpose();
 
@@ -567,8 +567,8 @@ void Application::UpdateUniforms()
         //
         {
             Vec3 camPos = Vec3(1, 1, 1) * 75.0f;
-            Vec3 camLookAt = Vec3(0, 0, 0);
-            Vec3 camUp = Vec3(0, 0, 1);
+            auto camLookAt = Vec3(0, 0, 0);
+            auto camUp = Vec3(0, 0, 1);
             Vec3 tmp = camPos.Cross(camUp);
             camUp = tmp.Cross(camPos);
             camUp.Normalize();
@@ -577,13 +577,13 @@ void Application::UpdateUniforms()
             //const int windowWidth = g_shadowFrameBuffer.m_parms.width;
             //const int windowHeight = g_shadowFrameBuffer.m_parms.height;
 
-            const float halfWidth = 60.0f;
+            constexpr float halfWidth = 60.0f;
             const float xmin = -halfWidth;
             const float xmax = halfWidth;
             const float ymin = -halfWidth;
             const float ymax = halfWidth;
-            const float zNear = 25.0f;
-            const float zFar = 175.0f;
+            constexpr float zNear = 25.0f;
+            constexpr float zFar = 175.0f;
             camera.matProj.OrthoVulkan(xmin, xmax, ymin, ymax, zNear, zFar);
             camera.matProj = camera.matProj.Transpose();
 
@@ -641,7 +641,8 @@ void Application::DrawFrame()
     const uint32_t imageIndex = m_deviceContext.BeginFrame();
 
     // Draw everything in an offscreen buffer
-    DrawOffscreen(&m_deviceContext, imageIndex, &m_uniformBuffer, m_renderModels.data(), static_cast<int>(m_renderModels.size()));
+    DrawOffscreen(&m_deviceContext, imageIndex, &m_uniformBuffer, m_renderModels.data(),
+                  static_cast<int>(m_renderModels.size()));
 
     //
     //	Draw the offscreen framebuffer to the swap chain frame buffer

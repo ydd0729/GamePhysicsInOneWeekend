@@ -9,18 +9,20 @@
 ConstraintOrientation
 ================================
 */
-class ConstraintOrientation : public Constraint {
+class ConstraintOrientation : public Constraint
+{
 public:
-	ConstraintOrientation() : Constraint(), m_Jacobian( 4, 12 ) {
-		m_baumgarte = 0.0f;
-	}
+    ConstraintOrientation() : Constraint(), m_Jacobian(4, 12)
+    {
+        m_baumgarte = 0.0f;
+    }
 
-	void PreSolve( const float dt_sec ) override;
-	void Solve() override;
+    void PreSolve(float dt_sec) override;
+    void Solve() override;
 
-	Quat m_q0;			// The initial relative quaternion q1^-1 * q2
+    Quat m_q0; // The initial relative quaternion q1^-1 * q2
 
-	MatMN m_Jacobian;
+    MatMN m_Jacobian;
 
-	float m_baumgarte;
+    float m_baumgarte;
 };

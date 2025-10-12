@@ -17,8 +17,9 @@ ManifoldCollector
 ManifoldCollector::AddContact
 ================================
 */
-void ManifoldCollector::AddContact( const contact_t & contact ) {
-	// TODO: Add Code
+void ManifoldCollector::AddContact(const contact_t& contact)
+{
+    // TODO: Add Code
 }
 
 /*
@@ -26,8 +27,9 @@ void ManifoldCollector::AddContact( const contact_t & contact ) {
 ManifoldCollector::RemoveExpired
 ================================
 */
-void ManifoldCollector::RemoveExpired() {
-	// TODO: Add Code
+void ManifoldCollector::RemoveExpired()
+{
+    // TODO: Add Code
 }
 
 /*
@@ -35,8 +37,9 @@ void ManifoldCollector::RemoveExpired() {
 ManifoldCollector::PreSolve
 ================================
 */
-void ManifoldCollector::PreSolve( const float dt_sec ) {
-	// TODO: Add Code
+void ManifoldCollector::PreSolve(const float dt_sec)
+{
+    // TODO: Add Code
 }
 
 /*
@@ -44,8 +47,9 @@ void ManifoldCollector::PreSolve( const float dt_sec ) {
 ManifoldCollector::Solve
 ================================
 */
-void ManifoldCollector::Solve() {
-	// TODO: Add Code
+void ManifoldCollector::Solve()
+{
+    // TODO: Add Code
 }
 
 /*
@@ -53,8 +57,9 @@ void ManifoldCollector::Solve() {
 Manifold::PostSolve
 ================================
 */
-void ManifoldCollector::PostSolve() {
-	// TODO: Add Code
+void ManifoldCollector::PostSolve()
+{
+    // TODO: Add Code
 }
 
 /*
@@ -70,8 +75,9 @@ Manifold
 Manifold::RemoveExpiredContacts
 ================================
 */
-void Manifold::RemoveExpiredContacts() {
-	// TODO: Add Code
+void Manifold::RemoveExpiredContacts()
+{
+    // TODO: Add Code
 }
 
 /*
@@ -79,8 +85,9 @@ void Manifold::RemoveExpiredContacts() {
 Manifold::AddContact
 ================================
 */
-void Manifold::AddContact( const contact_t & contact_old ) {
-	// TODO: Add Code
+void Manifold::AddContact(const contact_t& contact_old)
+{
+    // TODO: Add Code
 }
 
 /*
@@ -88,8 +95,9 @@ void Manifold::AddContact( const contact_t & contact_old ) {
 Manifold::PreSolve
 ================================
 */
-void Manifold::PreSolve( const float dt_sec ) {
-	// TODO: Add Code
+void Manifold::PreSolve(const float dt_sec)
+{
+    // TODO: Add Code
 }
 
 /*
@@ -97,8 +105,9 @@ void Manifold::PreSolve( const float dt_sec ) {
 Manifold::Solve
 ================================
 */
-void Manifold::Solve() {
-	// TODO: Add Code
+void Manifold::Solve()
+{
+    // TODO: Add Code
 }
 
 /*
@@ -106,6 +115,7 @@ void Manifold::Solve() {
 Manifold::PostSolve
 ================================
 */
-void Manifold::PostSolve() {
-	// TODO: Add Code
+void Manifold::PostSolve()
+{
+    // TODO: Add Code
 }

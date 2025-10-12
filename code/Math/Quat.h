@@ -8,7 +8,7 @@ public:
     Quat();
     Quat(const Quat& rhs);
     Quat(float X, float Y, float Z, float W);
-    Quat(Vec3 n, const float angleRadians);
+    Quat(Vec3 n, float angleRadians);
     const Quat& operator =(const Quat& rhs);
 
     Quat& operator *=(const float& rhs);
@@ -28,7 +28,6 @@ public:
     Mat3 ToMat3() const;
     Vec4 ToVec4() const { return Vec4(w, x, y, z); }
 
-public:
     float w;
     float x;
     float y;
@@ -36,26 +35,26 @@ public:
 };
 
 inline Quat::Quat() :
+    w(1),
     x(0),
     y(0),
-    z(0),
-    w(1)
+    z(0)
 {
 }
 
 inline Quat::Quat(const Quat& rhs) :
+    w(rhs.w),
     x(rhs.x),
     y(rhs.y),
-    z(rhs.z),
-    w(rhs.w)
+    z(rhs.z)
 {
 }
 
 inline Quat::Quat(float X, float Y, float Z, float W) :
+    w(W),
     x(X),
     y(Y),
-    z(Z),
-    w(W)
+    z(Z)
 {
 }
 
